@@ -12,8 +12,8 @@ const profileDescriptionElement = document.querySelector('.profile__discription'
 function openEditProfilePopup() {
   editProfilePopup.classList.add('popup_opened');
 
-  const currentNameValue = profileNameElement.innerHTML;
-  const currentJobValue = profileDescriptionElement.innerHTML;
+  const currentNameValue = profileNameElement.textContent;
+  const currentJobValue = profileDescriptionElement.textContent;
 
   nameInput.value = currentNameValue;
   jobInput.value = currentJobValue;
@@ -26,8 +26,8 @@ function closeEditProfilePopup() {
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
-  profileNameElement.innerHTML = nameInput.value;
-  profileDescriptionElement.innerHTML = jobInput.value;
+  profileNameElement.textContent = nameInput.value;
+  profileDescriptionElement.textContent = jobInput.value;
 
   closeEditProfilePopup();
 }
