@@ -32,48 +32,6 @@
 
     <section class="elements">
       <ul class="elements__container">
-        <li class="elements__item">
-          <img src="./images/kara.jpg" class="elements__item-image" alt="Старая часовня">
-          <div class="elements__title-wrapper">
-            <h2 class="elements__title">Карачаевск</h2>
-            <button type="button" class="elements__button-like"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img src="./images/elbrus.jpg" class="elements__item-image" alt="Поле с видом на Эльбрус">
-          <div class="elements__title-wrapper">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button type="button" class="elements__button-like"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img src="./images/dombay.png" class="elements__item-image" alt="Пейзаж гор">
-          <div class="elements__title-wrapper">
-            <h2 class="elements__title">Домбай</h2>
-            <button type="button" class="elements__button-like"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img src="./images/elbrus.jpg" class="elements__item-image" alt="Поле с видом на Эльбрус">
-          <div class="elements__title-wrapper">
-            <h2 class="elements__title">Гора Эльбрус</h2>
-            <button type="button" class="elements__button-like"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img src="./images/dombay.png" class="elements__item-image" alt="Пейзаж гор">
-          <div class="elements__title-wrapper">
-            <h2 class="elements__title">Домбай</h2>
-            <button type="button" class="elements__button-like"></button>
-          </div>
-        </li>
-        <li class="elements__item">
-          <img src="./images/kara.jpg" class="elements__item-image" alt="Старая часовня">
-          <div class="elements__title-wrapper">
-            <h2 class="elements__title">Карачаево-Черкесия</h2>
-            <button type="button" class="elements__button-like"></button>
-          </div>
-        </li>
       </ul>
     </section>
   </main>
@@ -90,9 +48,32 @@
         <input name="userAbout" type="text" class="popup__input" id="userAboutInput" placeholder="Описание профиля">
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
-      <button type="button" id="editProfilePopupCloseButton" class="popup__close-button"></button>
+      <button type="button" class="popup__close-button"></button>
     </div>
   </div>
+
+  <div class="popup" id="addNewElementPopup">
+    <div class="popup__container">
+      <form class="popup__form" id="addNewPopupForm" name="addNewPopupForm">
+        <h2 class="popup__header">Новое место</h2>
+        <input name="placeName" type="text" class="popup__input" id="placeNameInput" placeholder="Название">
+        <input name="placeImageLink" type="text" class="popup__input" id="placeImageLinkInput" placeholder="Ссылка на картинку">
+        <button type="submit" class="popup__save-button">Создать</button>
+      </form>
+      <button type="button" class="popup__close-button"></button>
+    </div>
+  </div>
+
+  <template id="elementTemplate">
+    <li class="elements__item">
+      <img class="elements__item-image">
+      <div class="elements__title-wrapper">
+        <h2 class="elements__title"></h2>
+        <button type="button" class="elements__button-like"></button>
+      </div>
+    </li>
+  </template>
+
   <script src="scripts/index.js"></script>
 </body>
 
