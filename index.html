@@ -48,7 +48,19 @@
         <input name="userAbout" type="text" class="popup__input" id="userAboutInput" placeholder="Описание профиля">
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
-      <button type="button" id="editProfilePopupCloseButton" class="popup__close-button"></button>
+      <button type="button" class="popup__close-button"></button>
+    </div>
+  </div>
+
+  <div class="popup" id="addNewElementPopup">
+    <div class="popup__container">
+      <form class="popup__form" id="addNewPopupForm" name="addNewPopupForm">
+        <h2 class="popup__header">Новое место</h2>
+        <input name="placeName" type="text" class="popup__input" id="placeNameInput" placeholder="Название">
+        <input name="placeImageLink" type="text" class="popup__input" id="placeImageLinkInput" placeholder="Ссылка на картинку">
+        <button type="submit" class="popup__save-button">Создать</button>
+      </form>
+      <button type="button" class="popup__close-button"></button>
     </div>
   </div>
 
