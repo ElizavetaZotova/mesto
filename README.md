@@ -11,8 +11,11 @@
 Проект был выполнен по макету из Figma. Использованы технологии выравнивания контента Flex и Grid Layout. Для адаптивной верстки использовались Media queries. Так же подключены дополнительные шрифты для соответствия макету. В проекте имеется попап, работа с которым написана на Java Script. На данный момент реализовано только изменение никнейма и описания профиля. В дальнейшем будет реализовано добавление новых карточек с фотографиями и их описания.
 
 
-**Figma**
+**Ссылки**
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+* [Ссылка на макет в Figma проект 4](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
+* [Ссылка на макет в Figma проект 5](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1)
 
+
+* [Ссылка на проект](https://elizavetazotova.github.io/mesto/)
 
