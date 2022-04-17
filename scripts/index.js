@@ -10,6 +10,7 @@ const profileEditButton = document.querySelector('#profileEditButton');
 const profileAddButton = document.querySelector('.profile__add-button')
 const editProfilePopup = document.querySelector('#editProfilePopup');
 const addNewElementPopup = document.querySelector('#addNewElementPopup');
+const elementPreviewPopup = document.querySelector('#elementPreviewPopup');
 const popupsCloseButtons = document.querySelectorAll('.popup__close-button');
 
 const profileNameElement = document.querySelector('.profile__name');
@@ -61,6 +62,15 @@ function renderElements() {
     elementItem.querySelector('.elements__item-image').src = card.link;
     elementItem.querySelector('.elements__title').textContent = card.name;
 
+    elementItem.querySelector('.elements__button-remove')
+      .addEventListener('click', removePlace);
+
+    elementItem.querySelector('.elements__button-like')
+      .addEventListener('click', likePlace);
+
+    elementItem.querySelector('.elements__item-image')
+      .addEventListener('click', openElementPreviePopup);
+
     // отображаем на странице
     elementsContainer.append(elementItem);
   }
@@ -85,6 +95,7 @@ function openEditProfilePopup() {
 function closePopups() {
   editProfilePopup.classList.remove('popup_opened');
   addNewElementPopup.classList.remove('popup_opened');
+  elementPreviewPopup.classList.remove('popup_opened');
 }
 
 function openAddNewElementPopup() {
@@ -110,6 +121,43 @@ function addElementFormSubmitHandler(evt) {
 
   closePopups();
   renderElements();
+}
+
+function removePlace(evt) {
+  evt.preventDefault();
+
+  const parentElement = evt.target.parentElement;
+
+  const parentImageLink = parentElement.querySelector('.elements__item-image').src;
+  const parentPlaceName = parentElement.querySelector('.elements__title').textContent;
+
+  const cardItem = cardsList.find(card => card.link === parentImageLink && card.name === parentPlaceName);
+  const findedCardIndex = cardsList.indexOf(cardItem);
+
+  cardsList.splice(findedCardIndex, 1);
+
+  renderElements();
+}
+
+function likePlace(evt) {
+  evt.preventDefault();
+
+  evt.target.classList.toggle('elements__button-like_active');
+}
+
+function openElementPreviePopup(evt) {
+  const parentElement = evt.target.parentElement;
+
+  const parentImageLink = parentElement.querySelector('.elements__item-image').src;
+  const parentPlaceName = parentElement.querySelector('.elements__title').textContent;
+
+  const previewImageElement = document.querySelector('.popup__image');
+  const imageTitleElement = document.querySelector('.popup__image-title')
+
+  previewImageElement.src = parentImageLink;
+  imageTitleElement.textContent = parentPlaceName;
+
+  elementPreviewPopup.classList.add('popup_opened');
 }
 
 formElement.addEventListener('submit', formSubmitHandler);
