@@ -59,6 +59,9 @@ function openEditProfilePopup() {
   editProfilePopupNameInputElement.value = profileNameElement.textContent;
   editProfilePopupNameAboutElement.value = profileDescriptionElement.textContent;
 
+  const triggerValidationEvent = new Event('input');
+  editProfilePopupNameInputElement.dispatchEvent(triggerValidationEvent);
+
   openPopup(editProfilePopupElement);
 }
 
@@ -91,13 +94,41 @@ function onAddElementFormSubmit(evt) {
   closePopup(addPlacePopupElement);
 }
 
+function closePopupOnOverleyClick(evt) {
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(evt.target);
+  }
+}
+
+function closePopupOnEscClick(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened');
+
+    closePopup(openedPopup);
+  }
+}
+
+function addPopupCloseListeners(popup) {
+  popup.addEventListener('click', closePopupOnOverleyClick);
+  document.addEventListener('keyup', closePopupOnEscClick);
+}
+
 function openPopup(popup) {
   popup.classList.add('popup_opened');
+
+  addPopupCloseListeners(popup);
+}
+
+function removeClosePoupListeners(popup) {
+  popup.removeEventListener('click', closePopupOnOverleyClick);
+  document.removeEventListener('keyup', closePopupOnEscClick);
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
   popup.classList.remove('popup_blacked');
+
+  removeClosePoupListeners(popup);
 }
 
 function openElementPreviePopup(evt) {
@@ -119,3 +150,12 @@ addPlacePopupCloseButtonElement.addEventListener('click', () => closePopup(addPl
 previewPlacePopupCloseButtonElement.addEventListener('click', () => closePopup(previewPlacePopupElement));
 
 initCards();
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type-error',
+  errorClass: 'popup__input-error_visible'
+});
