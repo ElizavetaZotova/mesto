@@ -42,33 +42,35 @@
 
   <div class="popup" id="editProfilePopup">
     <div class="popup__container">
-      <form class="popup__form" id="popupForm" name="popupFormName">
+      <form class="popup__form" id="editProfileForm" name="popupForm">
         <h2 class="popup__header">Редактировать профиль</h2>
         <input name="userName" type="text" class="popup__input" id="userNameInput" placeholder="Имя">
         <input name="userAbout" type="text" class="popup__input" id="userAboutInput" placeholder="Описание профиля">
         <button type="submit" class="popup__save-button">Сохранить</button>
       </form>
+
       <button type="button" class="popup__close-button"></button>
     </div>
   </div>
 
-  <div class="popup" id="addNewElementPopup">
+  <div class="popup" id="addPlacePopup">
     <div class="popup__container">
-      <form class="popup__form" id="addNewPopupForm" name="addNewPopupForm">
+      <form class="popup__form" id="addPlaceForm" name="addNewPopupForm">
         <h2 class="popup__header">Новое место</h2>
-        <input name="placeName" type="text" class="popup__input" id="placeNameInput" placeholder="Название">
-        <input name="placeImageLink" type="text" class="popup__input" id="placeImageLinkInput" placeholder="Ссылка на картинку">
+        <input name="placeName" type="text" class="popup__input" placeholder="Название">
+        <input name="placeImageLink" type="text" class="popup__input" placeholder="Ссылка на картинку">
         <button type="submit" class="popup__save-button">Создать</button>
       </form>
+
       <button type="button" class="popup__close-button"></button>
     </div>
   </div>
 
-  <div class="popup popup_blacked" id="elementPreviewPopup">
+  <div class="popup popup_blacked" id="previewPlacePopup">
     <div class="popup__image-container">
       <img class="popup__image">
       <button type="button" class="popup__close-button"></button>
-      <title class="popup__image-title"></title>
+      <title class="popup__image-title">Описание картинки</title>
     </div>
   </div>
 
@@ -83,6 +85,7 @@
     </li>
   </template>
 
+  <script src="scripts/cards.js"></script>
   <script src="scripts/index.js"></script>
 </body>
 
