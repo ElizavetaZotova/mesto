@@ -40,19 +40,20 @@ function initCards() {
 
 function renderElement(name, link) {
   const elementItem = elementTemplateItem.cloneNode(true);
+  const elementItemImage = elementItem.querySelector('.elements__item-image');
+  const elementItemTitle = elementItem.querySelector('.elements__title');
 
-  elementItem.querySelector('.elements__item-image').src = link;
-  elementItem.querySelector('.elements__item-image').alt = name;
-  elementItem.querySelector('.elements__title').textContent = name;
+  elementItemImage.src = link;
+  elementItemImage.alt = name;
+  elementItemImage.addEventListener('click', openElementPreviePopup);
+
+  elementItemTitle.textContent = name;
 
   elementItem.querySelector('.elements__button-remove')
     .addEventListener('click', removePlace);
 
   elementItem.querySelector('.elements__button-like')
     .addEventListener('click', likePlace);
-
-  elementItem.querySelector('.elements__item-image')
-    .addEventListener('click', openElementPreviePopup);
 
   return elementItem;
 }
