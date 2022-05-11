@@ -1,10 +1,13 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
+const cardTemplateSelector = '#elementTemplate';
+
 const profileNameElement = document.querySelector('.profile__name');
 const profileDescriptionElement = document.querySelector('.profile__discription');
 const profileEditButtonElement = document.querySelector('#profileEditButton');
 const placeAddButtonElement = document.querySelector('.profile__add-button')
 
-const elementTemplate = document.querySelector('#elementTemplate').content;
-const elementTemplateItem = elementTemplate.querySelector('.elements__item');
 const elementsContainer = document.querySelector('.elements__container');
 
 const editProfilePopupElement = document.querySelector('#editProfilePopup');
@@ -17,11 +20,6 @@ const addPlacePopupElement = document.querySelector('#addPlacePopup');
 const addPlacePopupSaveButtonElement = addPlacePopupElement.querySelector('.popup__save-button');
 const addPlacePopupCloseButtonElement = addPlacePopupElement.querySelector('.popup__close-button');
 
-const previewPlacePopupElement = document.querySelector('#previewPlacePopup');
-const previewPlacePopupCloseButtonElement = previewPlacePopupElement.querySelector('.popup__close-button');
-const previewPlacePopupImageElement = previewPlacePopupElement.querySelector('.popup__image');
-const previewPlacePopupImageTitleElement = previewPlacePopupElement.querySelector('.popup__image-title');
-
 const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -31,47 +29,21 @@ const validationConfig = {
   errorClass: 'popup__input-error_visible'
 }
 
+const formsValidators = {};
 
 function initCards() {
   initialCards.forEach(card => {
-    elementsContainer.prepend(renderElement(card.name, card.link));
+    elementsContainer.prepend(new Card(card.name, card.link, cardTemplateSelector).getElement());
   })
-}
-
-function renderElement(name, link) {
-  const elementItem = elementTemplateItem.cloneNode(true);
-  const elementItemImage = elementItem.querySelector('.elements__item-image');
-  const elementItemTitle = elementItem.querySelector('.elements__title');
-
-  elementItemImage.src = link;
-  elementItemImage.alt = name;
-  elementItemImage.addEventListener('click', openElementPreviePopup);
-
-  elementItemTitle.textContent = name;
-
-  elementItem.querySelector('.elements__button-remove')
-    .addEventListener('click', removePlace);
-
-  elementItem.querySelector('.elements__button-like')
-    .addEventListener('click', likePlace);
-
-  return elementItem;
-}
-
-function removePlace(evt) {
-  evt.target.closest('.elements__item').remove()
-}
-
-function likePlace(evt) {
-  evt.target.classList.toggle('elements__button-like_active');
 }
 
 function openEditProfilePopup() {
   editProfilePopupNameInputElement.value = profileNameElement.textContent;
   editProfilePopupNameAboutElement.value = profileDescriptionElement.textContent;
 
-  clearFormValidationErrors(document.forms.editProfileForm, validationConfig);
-  enableButton(editProfilePopupSaveButtonElement, validationConfig);
+  formsValidators[document.forms.editProfileForm.name].clearFormValidationErrors();
+  formsValidators[document.forms.editProfileForm.name].enableButton(editProfilePopupSaveButtonElement);
+
   openPopup(editProfilePopupElement);
 }
 
@@ -89,8 +61,10 @@ function onEditProfileFormSubmit(evt) {
 
 function openAddNewElementPopup() {
   document.forms.addPlaceForm.reset();
-  clearFormValidationErrors(document.forms.addPlaceForm, validationConfig);
-  disableButton(addPlacePopupSaveButtonElement, validationConfig);
+
+  formsValidators[document.forms.addPlaceForm.name].clearFormValidationErrors();
+  formsValidators[document.forms.addPlaceForm.name].disableButton(addPlacePopupSaveButtonElement);
+
   openPopup(addPlacePopupElement);
 }
 
@@ -100,7 +74,9 @@ function onAddElementFormSubmit(evt) {
   const formData = new FormData(evt.target);
   const formProps = Object.fromEntries(formData);
 
-  elementsContainer.prepend(renderElement(formProps.placeName, formProps.placeImageLink));
+  elementsContainer.prepend(
+    new Card(formProps.placeName, formProps.placeImageLink, cardTemplateSelector).getElement()
+  );
 
   closePopup(addPlacePopupElement);
 }
@@ -142,12 +118,14 @@ function closePopup(popup) {
   removeClosePoupListeners(popup);
 }
 
-function openElementPreviePopup(evt) {
-  previewPlacePopupImageElement.src = evt.target.src;
-  previewPlacePopupImageElement.alt = evt.target.alt;
-  previewPlacePopupImageTitleElement.textContent = evt.target.alt;
+function setFormsValidation() {
+  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
 
-  openPopup(previewPlacePopupElement);
+  formList.forEach((formElement) => {
+    formsValidators[formElement.name] = new FormValidator(validationConfig, formElement);
+
+    formsValidators[formElement.name].enableValidation();
+  });
 }
 
 profileEditButtonElement.addEventListener('click', openEditProfilePopup);
@@ -158,8 +136,6 @@ addPlacePopupElement.querySelector('.popup__form').addEventListener('submit', on
 
 editProfilePopupCloseButtonElement.addEventListener('click', () => closePopup(editProfilePopupElement));
 addPlacePopupCloseButtonElement.addEventListener('click', () => closePopup(addPlacePopupElement));
-previewPlacePopupCloseButtonElement.addEventListener('click', () => closePopup(previewPlacePopupElement));
 
 initCards();
-
-enableValidation(validationConfig);
+setFormsValidation();
