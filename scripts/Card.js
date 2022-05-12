@@ -1,15 +1,9 @@
-import { ImagePopup } from './popup/ImagePopup.js';
-
 export class Card {
-  constructor(name, link, selector) {
+  constructor(name, link, selector, openCardPreviewFunction) {
     this._name = name;
     this._link = link;
     this._selector = selector;
-
-    this._element = null;
-    this._elementImage = null;
-
-    this._previewPopup = new ImagePopup('#previewPlacePopup');
+    this._openCardPreviewFunction = openCardPreviewFunction;
 
     this._createElement();
     this._setListeners();
@@ -53,6 +47,6 @@ export class Card {
   }
 
   _openPreviePopup(evt) {
-    this._previewPopup.open(evt.target.alt, evt.target.src);
+    this._openCardPreviewFunction(evt.target.alt, evt.target.src);
   }
 }
