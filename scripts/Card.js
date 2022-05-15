@@ -46,7 +46,7 @@ export class Card {
     evt.target.classList.toggle('elements__button-like_active');
   }
 
-  _openPreviePopup(evt) {
-    this._openCardPreviewFunction(evt.target.alt, evt.target.src);
+  _openPreviePopup() {
+    this._openCardPreviewFunction(this._name, this._link);
   }
 }

@@ -17,9 +17,9 @@ const profileEditPopupCloseButtonElement = profileEditPopupElement.querySelector
 const profileEditPopupNameInputElement = profileEditPopupElement.querySelector('#userNameInput');
 const profileEditPopupNameAboutElement = profileEditPopupElement.querySelector('#userAboutInput')
 
-const addPlacePopupElement = document.querySelector('#addPlacePopup');
-const addPlacePopupSaveButtonElement = addPlacePopupElement.querySelector('.popup__save-button');
-const addPlacePopupCloseButtonElement = addPlacePopupElement.querySelector('.popup__close-button');
+const placeAddNewPopupElement = document.querySelector('#addPlacePopup');
+const placeAddNewPopupSaveButtonElement = placeAddNewPopupElement.querySelector('.popup__save-button');
+const placeAddNewPopupCloseButtonElement = placeAddNewPopupElement.querySelector('.popup__close-button');
 
 const placePreviewPopupElement = document.querySelector('#previewPlacePopup');
 const placePreviewPopupCloseButtonElement = placePreviewPopupElement.querySelector('.popup__close-button');
@@ -46,7 +46,7 @@ function openEditProfilePopup() {
   profileEditPopupNameAboutElement.value = profileDescriptionElement.textContent;
 
   formsValidators[document.forms.editProfileForm.name].clearFormValidationErrors();
-  formsValidators[document.forms.editProfileForm.name].enableButton(profileEditPopupSaveButtonElement);
+  formsValidators[document.forms.editProfileForm.name].enableButton();
 
   openPopup(profileEditPopupElement);
 }
@@ -67,9 +67,9 @@ function openAddNewElementPopup() {
   document.forms.addPlaceForm.reset();
 
   formsValidators[document.forms.addPlaceForm.name].clearFormValidationErrors();
-  formsValidators[document.forms.addPlaceForm.name].disableButton(addPlacePopupSaveButtonElement);
+  formsValidators[document.forms.addPlaceForm.name].disableButton();
 
-  openPopup(addPlacePopupElement);
+  openPopup(placeAddNewPopupElement);
 }
 
 function openCardPreviePopup(name, link) {
@@ -88,7 +88,7 @@ function onAddElementFormSubmit(evt) {
   const card = createCard(formProps.placeName, formProps.placeImageLink);
 
   renderCard(card);
-  closePopup(addPlacePopupElement);
+  closePopup(placeAddNewPopupElement);
 }
 
 function closePopupOnOverleyClick(evt) {
@@ -152,7 +152,7 @@ document.forms.editProfileForm.addEventListener('submit', onEditProfileFormSubmi
 document.forms.addPlaceForm.addEventListener('submit', onAddElementFormSubmit);
 
 profileEditPopupCloseButtonElement.addEventListener('click', () => closePopup(profileEditPopupElement));
-addPlacePopupCloseButtonElement.addEventListener('click', () => closePopup(addPlacePopupElement));
+placeAddNewPopupCloseButtonElement.addEventListener('click', () => closePopup(placeAddNewPopupElement));
 placePreviewPopupCloseButtonElement.addEventListener('click', () => closePopup(placePreviewPopupElement));
 
 initCards();
