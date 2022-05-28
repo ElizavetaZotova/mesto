@@ -1,9 +1,9 @@
 export class Card {
-  constructor(name, link, selector, openCardPreviewFunction) {
+  constructor(name, link, selector, handleCardClick) {
     this._name = name;
     this._link = link;
     this._selector = selector;
-    this._openCardPreviewFunction = openCardPreviewFunction;
+    this._handleCardClick = handleCardClick;
 
     this._createElement();
     this._setListeners();
@@ -47,6 +47,6 @@ export class Card {
   }
 
   _openPreviePopup() {
-    this._openCardPreviewFunction(this._name, this._link);
+    this._handleCardClick(this._name, this._link);
   }
 }
