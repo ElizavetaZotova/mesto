@@ -1,6 +1,6 @@
 import { Popup } from './Popup.js'
 
-export class ImagePopup extends Popup {
+export class PopupWithImage extends Popup {
   constructor(selector) {
     super(selector)
 

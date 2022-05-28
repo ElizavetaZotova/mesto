@@ -9,19 +9,21 @@ export class FormValidator {
   }
 
   clearFormValidationErrors() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._validationParams.inputSelector));
+    if (!this._inputList) {
+      return;
+    }
 
-    inputList.forEach((inputElement) => this._hideInputError(inputElement));
+    this._inputList.forEach((inputElement) => this._hideInputError(inputElement));
   }
 
-  disableButton(buttonElement) {
-    buttonElement.classList.add(this._validationParams.inactiveButtonClass);
-    buttonElement.setAttribute('disabled', true);
+  disableButton() {
+    this._submitButtonElement.classList.add(this._validationParams.inactiveButtonClass);
+    this._submitButtonElement.setAttribute('disabled', true);
   }
 
-  enableButton(buttonElement) {
-    buttonElement.classList.remove(this._validationParams.inactiveButtonClass);
-    buttonElement.removeAttribute('disabled');
+  enableButton() {
+    this._submitButtonElement.classList.remove(this._validationParams.inactiveButtonClass);
+    this._submitButtonElement.removeAttribute('disabled');
   }
 
   _hideInputError(inputElement) {
@@ -34,35 +36,35 @@ export class FormValidator {
   };
 
   _setEventListeners() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._validationParams.inputSelector));
-    const buttonElement = this._formElement.querySelector(this._validationParams.submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._validationParams.inputSelector));
+    this._submitButtonElement = this._formElement.querySelector(this._validationParams.submitButtonSelector);
 
     // чтобы проверить состояние кнопки в самом начале
-    this._toggleButtonState(inputList, buttonElement);
+    this._toggleButtonState();
 
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._checkInputValidity(inputElement);
         // чтобы проверять его при изменении любого из полей
-        this._toggleButtonState(inputList, buttonElement);
+        this._toggleButtonState();
       });
     });
   };
 
-  _hasInvalidInput(inputList) {
-    return inputList.some((inputElement) => {
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
   }
 
-  _toggleButtonState(inputList, buttonElement) {
-    if (this._hasInvalidInput(inputList)) {
-      this.disableButton(buttonElement);
+  _toggleButtonState() {
+    if (this._hasInvalidInput()) {
+      this.disableButton();
 
       return;
     }
 
-    this.enableButton(buttonElement);
+    this.enableButton();
   }
 
   _showInputError(inputElement, errorMessage) {
