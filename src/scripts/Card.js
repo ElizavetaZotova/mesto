@@ -30,7 +30,7 @@ export class Card {
 
   _setListeners() {
     this._element.querySelector('.elements__button-remove')
-      .addEventListener('click', this._remove);
+      .addEventListener('click', this._remove.bind(this));
 
     this._element.querySelector('.elements__button-like')
       .addEventListener('click', this._like);
@@ -38,8 +38,10 @@ export class Card {
     this._elementImage.addEventListener('click', this._openPreviePopup.bind(this));
   }
 
-  _remove(evt) {
-    evt.target.closest('.elements__item').remove()
+  _remove() {
+    this._element.remove();
+
+    this._element = null;
   }
 
   _like(evt) {

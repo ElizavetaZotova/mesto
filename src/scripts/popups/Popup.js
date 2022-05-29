@@ -13,7 +13,6 @@ export class Popup {
 
   close() {
     this._popup.classList.remove('popup_opened')
-    this._popup.classList.remove('popup_blacked');
 
     this._removeListeners();
   }
