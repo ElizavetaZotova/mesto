@@ -26,7 +26,7 @@ const formsValidators = {};
 const cardList = new Section({
   items: initialCards,
   renderer: item => {
-    const card = new Card(item.name, item.link, cardTemplateSelector, openCardPreviePopup).getElement();
+    const card =  createCard(item.name, item.link);
 
     cardList.addItem(card);
   }
@@ -70,7 +70,7 @@ function openAddNewElementPopup() {
 }
 
 function onAddElementFormSubmit(values) {
-  const card = new Card(values.placeName, values.placeImageLink, cardTemplateSelector, openCardPreviePopup).getElement();
+  const card = createCard(values.placeName, values.placeImageLink);
 
   cardList.addItem(card);
   addCardModal.close();
@@ -88,6 +88,10 @@ function setFormsValidation() {
 
     formsValidators[formElement.name].enableValidation();
   });
+}
+
+function createCard(name, link) {
+  return new Card(name, link, cardTemplateSelector, openCardPreviePopup).getElement();
 }
 
 profileEditButtonElement.addEventListener('click', openEditProfilePopup);
