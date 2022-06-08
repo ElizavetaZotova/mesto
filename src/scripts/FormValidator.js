@@ -2,6 +2,9 @@ export class FormValidator {
   constructor(validationParams, formElement) {
     this._validationParams = validationParams;
     this._formElement = formElement;
+
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._validationParams.inputSelector));
+    this._submitButtonElement = this._formElement.querySelector(this._validationParams.submitButtonSelector);
   }
 
   enableValidation() {
@@ -36,9 +39,6 @@ export class FormValidator {
   };
 
   _setEventListeners() {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._validationParams.inputSelector));
-    this._submitButtonElement = this._formElement.querySelector(this._validationParams.submitButtonSelector);
-
     // чтобы проверить состояние кнопки в самом начале
     this._toggleButtonState();
 
@@ -73,13 +73,6 @@ export class FormValidator {
     inputElement.classList.add(this._validationParams.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._validationParams.errorClass);
-  };
-
-  _hideInputError(inputElement) {
-    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove(this._validationParams.inputErrorClass);
-    errorElement.classList.remove(this._validationParams.errorClass);
-    errorElement.textContent = '';
   };
 
   _checkInputValidity(inputElement) {

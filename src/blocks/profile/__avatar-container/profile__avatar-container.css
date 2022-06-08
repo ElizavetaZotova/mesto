@@ -3,6 +3,8 @@
   height: 120px;
   position: relative;
   margin-right: 30px;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 880px) {
@@ -10,4 +12,12 @@
     margin-right: 0;
     margin-bottom: 26px;
   }
+}
+
+.profile__avatar-container:hover {
+  opacity: 0.8;
+}
+
+.profile__avatar-container:hover > .profile__avatar-edit-button {
+  visibility: visible;
 }

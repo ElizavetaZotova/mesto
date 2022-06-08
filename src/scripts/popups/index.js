@@ -1,6 +1,7 @@
 import { Popup } from './Popup';
-import { PopupWithForm } from './PopupWithForm.js';
-import { PopupWithImage } from './PopupWithImage.js';
+import { PopupWithForm } from './PopupWithForm';
+import { PopupWithImage } from './PopupWithImage';
+import { PopupWithConfirm } from './PopupWithConfirm';
 
-export { Popup, PopupWithForm, PopupWithImage};
+export { Popup, PopupWithForm, PopupWithImage, PopupWithConfirm };
 
