@@ -16,6 +16,7 @@
     <section class="profile">
       <div class="profile__avatar-container">
         <img src="<%=require('./images/ava.png')%>" alt="Изображение профиля" class="profile__avatar">
+        <div class="profile__avatar-edit-button"></div>
       </div>
 
       <div class="profile__info">
@@ -86,16 +87,47 @@
     </div>
   </div>
 
+  <div class="popup" id="deleteCardPopup">
+    <div class="popup__container">
+      <form class="popup__form" id="deleteCardForm" name="deletePopupForm">
+        <h2 class="popup__header">Вы уверены?</h2>
+
+        <button type="submit" class="popup__save-button">Да</button>
+      </form>
+
+      <button type="button" class="popup__close-button"></button>
+    </div>
+  </div>
+
   <template id="elementTemplate">
     <li class="elements__item">
       <img class="elements__item-image">
       <button type="button" class="elements__button-remove"></button>
       <div class="elements__title-wrapper">
         <h2 class="elements__title"></h2>
-        <button type="button" class="elements__button-like"></button>
+
+        <div class="elements__like-container">
+          <button type="button" class="elements__button-like"></button>
+          <span class="elements__like-counter">0</span>
+        </div>
       </div>
     </li>
   </template>
+
+  <div class="popup" id="updateUserAvatarPopup">
+    <div class="popup__container">
+      <form class="popup__form" id="updateAvatarForm" name="addNewPopupForm">
+        <h2 class="popup__header">Обновить аватар</h2>
+
+        <input name="avatarImageLink" type="url" class="popup__input" id="avatarImageLinkInput" placeholder="Ссылка на картинку" required>
+        <span class="popup__input-error avatarImageLinkInput-error"></span>
+
+        <button type="submit" class="popup__save-button">Сохранить</button>
+      </form>
+
+      <button type="button" class="popup__close-button"></button>
+    </div>
+  </div>
 </body>
 
 </html>
