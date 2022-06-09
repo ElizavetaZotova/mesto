@@ -1,2 +1,2 @@
-import './styles/index.css';
-import './scripts/index.js';
+import './pages/index.css';
+import './pages/index.js';

@@ -15,14 +15,15 @@ export class PopupWithForm extends Popup {
     this._bindedSubmitHandler = this._submitFormHandler.bind(this);
   }
 
-  setEventListeners() {
-    super.setEventListeners();
+  open() {
+    super.open();
     this._popupForm.addEventListener('submit', this._bindedSubmitHandler);
   }
 
   close() {
     super.close();
     this._popupForm.reset();
+    this._popupForm.removeEventListener('submit', this._bindedSubmitHandler);
   }
 
   renderLoading(isLoading) {
@@ -31,12 +32,6 @@ export class PopupWithForm extends Popup {
     } else {
       this._popupButton.textContent = this._popupButtonTextContent;
     }
-  }
-
-  _removeListeners() {
-    super._removeListeners();
-
-    this._popupForm.removeEventListener('submit', this._bindedSubmitHandler);
   }
 
   _submitFormHandler(event) {

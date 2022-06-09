@@ -39,6 +39,8 @@ export class Card {
 
     if (this._likes.some(like => like._id === this._userId)) {
       this._elementLikeButton.classList.add('elements__button-like_active');
+    } else {
+      this._elementLikeButton.classList.remove('elements__button-like_active');
     }
   }
 
@@ -70,20 +72,18 @@ export class Card {
     this._element.querySelector('.elements__button-remove')
       .addEventListener('click', this._handleCardDelete);
 
-    this._element.querySelector('.elements__button-like')
+    this._elementLikeButton
       .addEventListener('click', this._like.bind(this));
 
     this._elementImage.addEventListener('click', this._openPreviePopup.bind(this));
   }
 
   _like() {
-    this._elementLikeButton.classList.toggle('elements__button-like_active');
-
     if (this._elementLikeButton.classList.contains('elements__button-like_active')) {
-      return this._handleLike();
+      return this._handleDislike();
     }
 
-    this._handleDislike();
+    this._handleLike();
   }
 
   _openPreviePopup() {
