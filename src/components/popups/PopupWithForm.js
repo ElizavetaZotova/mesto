@@ -11,19 +11,21 @@ export class PopupWithForm extends Popup {
 
     this._popupButton = this._popupForm.querySelector('.popup__save-button');
     this._popupButtonTextContent = this._popupButton.textContent;
-
-    this._bindedSubmitHandler = this._submitFormHandler.bind(this);
   }
 
   open() {
     super.open();
-    this._popupForm.addEventListener('submit', this._bindedSubmitHandler);
   }
 
   close() {
     super.close();
     this._popupForm.reset();
-    this._popupForm.removeEventListener('submit', this._bindedSubmitHandler);
+  }
+
+  setEventListeners() {
+    super.setEventListeners();
+
+    this._popupForm.addEventListener('submit', this._submitFormHandler.bind(this));
   }
 
   renderLoading(isLoading) {
